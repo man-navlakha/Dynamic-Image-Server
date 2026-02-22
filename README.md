@@ -59,6 +59,16 @@ If you wish to run a local instance of this server, please follow the steps belo
 
 ## API Endpoints
 
+### Generic Image
+
+Takes any free-text query and redirects to the best matching image found on Wikimedia Commons.
+
+  * **Endpoint:** `GET /img?text=<your text>`
+  * **Example:** `GET /img?text=Honda%20Activa%204G`
+  * **Success Response:** `302 Found` redirect to an image URL
+  * **JSON mode:** add `?format=json` (and `&debug=1` to see top candidates)
+  * **If local network blocks HTTPS:** set `NODE_EXTRA_CA_CERTS` to your proxy CA cert. For local-only testing you can set `IMG_ALLOW_INSECURE_TLS=1` (not recommended for production).
+
 ### Animal API
 
 The core feature of this service. It provides a simple way to get images of animals.

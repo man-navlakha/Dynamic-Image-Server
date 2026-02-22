@@ -9,6 +9,7 @@ require('dotenv').config();
 // Import routes
 const userRoutes = require('./routes/users');
 const animalRoutes = require('./routes/animal');
+const imgRoutes = require('./routes/img');
 
 
 // Middleware
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use('/api/animal', animalRoutes);
 app.use('/api/users', userRoutes);
+app.use('/img', imgRoutes);
 
 // Root route
 app.get('/', (req, res) => {
