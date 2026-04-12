@@ -12,6 +12,7 @@ const userRoutes = require('./routes/users');
 const animalRoutes = require('./routes/animal');
 const vehicleRoutes = require('./routes/vehicle');
 const imgRoutes = require('./routes/img');
+const statsRoutes = require('./routes/stats');
 
 
 // Middleware
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 app.use('/api/vehicle', vehicleRoutes);
 app.use('/api/animal', animalRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api', statsRoutes);
 app.use('/img', imgRoutes);
 
 // Root route

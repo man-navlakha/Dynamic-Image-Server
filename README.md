@@ -1,156 +1,176 @@
 
-# Dynamic Image API
+# Dynamic Image Server
 
-Welcome to the Dynamic Image API, a powerful and flexible service for fetching animal images on demand. This API also includes a sample endpoint for managing user data.
+Production-ready dynamic image APIs built with Express. This project now includes a custom GitHub stats card endpoint that returns animated SVG cards suitable for GitHub profile READMEs.
 
+
+![GitHub stats](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
 ## Base URL
 
-All API endpoints are relative to the following base URL. Please replace `https://img-server-theta.vercel.app/` with the live URL of your Vercel deployment.
+Use your deployed host (example):
 
+```text
+https://img-server-theta.vercel.app
 ```
-https://img-server-theta.vercel.app/
+
+## Quick Start (Local)
+
+1. Install dependencies:
+
+```bash
+npm install
 ```
 
------
+2. Configure environment variables in `.env`:
 
-## Getting Started (Local Setup)
+```env
+PORT=3000
+# Optional but strongly recommended for higher GitHub API limits
+GITHUB_TOKEN=ghp_xxx
+```
 
-If you wish to run a local instance of this server, please follow the steps below.
+3. Run locally:
 
-### Prerequisites
+```bash
+node man.js
+```
 
-  * Node.js (v18 or higher)
-  * npm (Node Package Manager)
-  * A Pexels API Key (available for free from [pexels.com/api](https://www.pexels.com/api/))
+4. Run tests:
 
-### Installation & Configuration
+```bash
+npm test
+```
 
-1.  **Clone the repository:**
+## New Endpoint: GitHub Stats Card
 
-    ```bash
-    git clone Dynamic-Image-Server
-    cd Dynamic-Image-Server
-    ```
+- Method: `GET`
+- Path: `/api/stats`
+- Response content type: `image/svg+xml; charset=utf-8`
 
-2.  **Install dependencies:**
+### Required Query Params
 
-    ```bash
-    npm install
-    ```
+- `username` (required): GitHub login name.
 
-3.  **Configure Environment Variables:**
-    Create a file named `.env` in the root of the project and add your Pexels API key.
+### Optional Query Params
 
-    ```env
-    PEXELS_API_KEY="goT7jSJYxYoqXLfc0i66CmfxqZ1ty8IeSGEl4qYVvZhDV3NjJT2Ny8ro"
-    ```
+- `theme`: `dark` | `light` | `ocean` (default: `dark`)
+- `title_color`: hex color override (`#RRGGBB` or `RRGGBB`)
+- `text_color`: hex color override (`#RRGGBB` or `RRGGBB`)
+- `icon_color`: hex color override (`#RRGGBB` or `RRGGBB`)
+- `bg_color`: hex color override (`#RRGGBB` or `RRGGBB`)
+- `show_languages`: `true`/`false`, `1`/`0`, `yes`/`no`
 
-    *Note: For this to work, you would need to update `routes/animal.js` to use `process.env.PEXELS_API_KEY` instead of the hardcoded key.*
+### API Examples
 
-4.  **Run the server:**
+```text
+/api/stats?username=man-navlakha
+/api/stats?username=man-navlakha&theme=dark&title_color=blue
+/api/stats?username=man-navlakha&theme=ocean&title_color=00e5ff&text_color=e8f9ff&icon_color=40f3ff&bg_color=022135
+/api/stats?username=man-navlakha&show_languages=true
+```
 
-    ```bash
-    node man.js
-    ```
+Note: only valid hex overrides are applied. Non-hex values (such as `blue`) are safely ignored.
 
-    The server will be running at `http://localhost:3000`.
+### Markdown Embed Examples
 
------
+```md
+![GitHub Stats](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
+![GitHub Stats - Dark](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=dark)
+![GitHub Stats - Custom](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean&show_languages=true&title_color=ecfeff&text_color=c9ecff&icon_color=3ddad7&bg_color=082f49)
+```
 
-## API Endpoints
+## Theme Options
 
-### Generic Image
+| Theme | title_color | text_color | icon_color | bg_color |
+|---|---|---|---|---|
+| dark | `#ffffff` | `#d5ddf0` | `#71f3c6` | `#0f172a` |
+| light | `#0f172a` | `#334155` | `#0ea5e9` | `#ecfeff` |
+| ocean | `#ecfeff` | `#b7e3f8` | `#3ddad7` | `#082f49` |
 
-Takes any free-text query and redirects to the best matching image found on Wikimedia Commons.
+Color override precedence:
 
-  * **Endpoint:** `GET /img?text=<your text>`
-  * **Example:** `GET /img?text=Honda%20Activa%204G`
-  * **Success Response:** `302 Found` redirect to an image URL
-  * **JSON mode:** add `?format=json` (and `&debug=1` to see top candidates)
-  * **If local network blocks HTTPS:** set `NODE_EXTRA_CA_CERTS` to your proxy CA cert. For local-only testing you can set `IMG_ALLOW_INSECURE_TLS=1` (not recommended for production).
+1. Query override (`title_color`, etc.)
+2. Selected `theme`
+3. `dark` fallback
 
-### Animal API
+## Error Behavior
 
-The core feature of this service. It provides a simple way to get images of animals.
+Errors are always returned as SVG cards (never JSON), with appropriate HTTP status:
 
-#### Get Animal Image
+- `400`: missing/invalid query params (`username` missing or malformed)
+- `404`: GitHub user not found
+- `502`: upstream GitHub API unavailable/rate-limited/network failure
 
-Redirects to an image URL of the specified animal. The service first checks a local cache; if a match isn't found, it fetches an image from the Pexels API.
+This keeps README embeds visually stable even on failures.
 
-  * **Endpoint:** `GET /api/animal/:name`
+## Performance and Reliability
 
-  * **Description:** The `:name` parameter should be the name of an animal (e.g., `tiger`, `dog`, `cat`).
+The stats endpoint includes:
 
-  * **Success Response:**
+- In-memory cache with TTL (`10 minutes`) to reduce repeated GitHub calls.
+- HTTP cache headers:
+  - `max-age=300`
+  - `s-maxage=1800`
+  - `stale-while-revalidate=43200`
+- Strict query validation and sanitization.
+- Modular architecture for extensibility:
+  - `routes/stats.js`
+  - `lib/stats/githubClient.js`
+  - `lib/stats/query.js`
+  - `lib/stats/themeConfig.js`
+  - `lib/stats/svgRenderer.js`
+  - `lib/stats/cache.js`
 
-      * **Code:** `302 Found`
-      * **Content:** The request is redirected to the direct URL of the image.
+## Vercel Deployment Guide
 
-  * **Error Response:**
+### 1) Import Project
 
-      * **Code:** `404 Not Found`
-      * **Content:** `No image found for this`
+- Import this repository into Vercel.
+- Framework preset: `Other` / Node serverless.
 
-  * **Example Usage (HTML):**
+### 2) Build Settings
 
-    ```html
-    <img src="https://img-server-theta.vercel.app/api/animal/lion" alt="Image of a Lion">
-    ```
-    ![https://img-server-theta.vercel.app/](https://img-server-theta.vercel.app/api/animal/lion)
+- Build command: none required
+- Output directory: none required
+- Install command: `npm install`
+- Entrypoint already configured through `vercel.json` (`man.js`)
 
-### Users API
+### 3) Environment Variables
 
-A sample API for managing mock user data.
+Set in Vercel project settings:
 
-#### Get All Users
+- `GITHUB_TOKEN` (recommended, keeps you away from low anonymous API limits)
+- `PORT` is optional for local usage only
 
-Retrieves a list of all sample users.
+### 4) Deploy and Test
 
-  * **Endpoint:** `GET /api/users`
-  * **Success Response:**
-      * **Code:** `200 OK`
-      * **Content:**
-        ```json
-        [
-            { "id": 1, "name": "Alice" },
-            { "id": 2, "name": "Bob" }
-        ]
-        ```
+After deployment:
 
-#### Get User by ID
+```text
+https://<your-project>.vercel.app/api/stats?username=man-navlakha
+```
 
-Retrieves a single user by their unique ID.
+### 5) Verify Headers
 
-  * **Endpoint:** `GET /api/users/:id`
-  * **Success Response:**
-      * **Code:** `200 OK`
-      * **Content:**
-        ```json
-        { "id": 1, "name": "Alice" }
-        ```
-  * **Error Response:**
-      * **Code:** `404 Not Found`
-      * **Content:** `{ "message": "User not found" }`
+Confirm response contains:
 
-#### Create a New User
+- `content-type: image/svg+xml; charset=utf-8`
+- `cache-control: public, max-age=300, s-maxage=1800, stale-while-revalidate=43200`
 
-Simulates the creation of a new user.
+## Scaling Suggestions
 
-  * **Endpoint:** `POST /api/users`
-  * **Request Body:**
-    ```json
-    {
-        "name": "Charlie"
-    }
-    ```
-  * **Success Response:**
-      * **Code:** `201 Created`
-      * **Content:**
-        ```json
-        {
-            "message": "User created",
-            "user": {
-                "name": "Charlie"
-            }
-        }
-        ```
+For higher traffic production usage:
+
+1. Replace in-memory cache with Redis/Upstash for shared cache across instances.
+2. Add ETag generation and conditional requests (`If-None-Match`) for bandwidth reduction.
+3. Add ISR-like regeneration policies at edge/CDN layer.
+4. Add explicit GitHub rate-limit backoff and circuit-breaker behavior.
+5. Put endpoint behind CDN with regional caching.
+6. Add observability: logs + metrics + alerting for upstream failures and latency.
+
+## Existing Endpoints
+
+- `/img?text=...`: generic Wikimedia image resolver and redirect.
+- `/api/animal/:name`: returns configured animal image (or fetches from Pexels).
+- `/api/vehicle/:name`: returns configured vehicle image or generated SVG fallback.
+- `/api/users`: sample CRUD-like user endpoints.
