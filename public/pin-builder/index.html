@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pin Builder</title>
+  <link rel="stylesheet" href="/pin-panel/assets/styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="panel">
+      <h2 class="section-title">Properties</h2>
+      <div class="hr"></div>
+
+      <div class="form-grid">
+        <label class="req" for="username">Username</label>
+        <input id="username" value="man-navlakha" />
+
+        <label class="req" for="repo">Repo</label>
+        <input id="repo" value="blog_ms" />
+
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="react">react</option>
+          <option value="dark">dark</option>
+          <option value="light">light</option>
+        </select>
+
+        <label for="hide_border">Hide Border</label>
+        <select id="hide_border">
+          <option value="false">false</option>
+          <option value="true">true</option>
+        </select>
+
+        <label for="border_radius">Border Radius</label>
+        <input id="border_radius" value="16" />
+
+        <label for="locale">Locale</label>
+        <select id="locale">
+          <option>English (en)</option>
+        </select>
+
+        <label for="short_numbers">Short Numbers</label>
+        <select id="short_numbers">
+          <option>false</option>
+          <option>true</option>
+        </select>
+
+        <label for="date_format">Date Format</label>
+        <select id="date_format">
+          <option>Aug 10, 2016</option>
+        </select>
+
+        <label for="streak_mode">Streak Mode</label>
+        <select id="streak_mode">
+          <option>Weekly</option>
+        </select>
+
+        <label>Exclude Days</label>
+        <div class="pill-row">
+          <div class="pill">S</div><div class="pill">M</div><div class="pill">T</div><div class="pill">W</div><div class="pill">T</div><div class="pill">F</div><div class="pill">S</div>
+        </div>
+
+        <label>Show Sections</label>
+        <div class="switch-row">
+          <div class="toggle-chip">Total</div>
+          <div class="toggle-chip">Current</div>
+          <div class="toggle-chip">Longest</div>
+        </div>
+
+        <label for="card_width">Card Width</label>
+        <input id="card_width" value="780" />
+
+        <label for="card_height">Card Height</label>
+        <input id="card_height" value="260" />
+
+        <label for="output_type">Output Type</label>
+        <select id="output_type">
+          <option>SVG</option>
+        </select>
+      </div>
+
+      <div class="adv">▼ ⚙ Advanced Options</div>
+      <div class="hr"></div>
+
+      <div class="form-grid">
+        <label>Background Type</label>
+        <div class="radio-row">
+          <label><input type="radio" name="bgType" checked /> Solid</label>
+          <label><input type="radio" name="bgType" /> Gradient</label>
+        </div>
+
+        <label for="add_property">Add Property</label>
+        <div class="add-property">
+          <select id="add_property">
+            <option>background</option>
+            <option>title_color</option>
+            <option>text_color</option>
+            <option>icon_color</option>
+          </select>
+          <button class="add-btn" type="button">+</button>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn" type="button">Export to PHP</button>
+        <button class="btn secondary" type="button">Clear Options</button>
+        <button class="btn" id="openPermalink" type="button">Open Permalink</button>
+      </div>
+    </section>
+
+    <section class="preview-card">
+      <h2 class="section-title">Preview</h2>
+      <div class="hr"></div>
+
+      <div class="preview-wrap">
+        <img id="previewImg" alt="pin preview" />
+      </div>
+
+      <div class="note">Note: The stats above are examples. Your preview is generated from your current parameters.</div>
+
+      <h2 class="block-title">Markdown</h2>
+      <div class="hr"></div>
+      <textarea id="markdownBox" class="code-box" readonly></textarea>
+      <div class="button-row"><button class="btn" id="copyMdBtn" type="button">Copy To Clipboard</button></div>
+
+      <h2 class="block-title">HTML</h2>
+      <div class="hr"></div>
+      <textarea id="htmlBox" class="code-box" readonly></textarea>
+      <div class="button-row"><button class="btn" id="copyHtmlBtn" type="button">Copy To Clipboard</button></div>
+
+      <div class="linkish">Frequently Asked Questions ↗</div>
+    </section>
+  </main>
+
+  <script>
+    const byId = (id) => document.getElementById(id);
+
+    function endpointUrl() {
+      const q = new URLSearchParams({
+        username: byId('username').value.trim(),
+        repo: byId('repo').value.trim(),
+        theme: byId('theme').value,
+        hide_border: byId('hide_border').value,
+        border_radius: byId('border_radius').value,
+        card_width: byId('card_width').value,
+        card_height: byId('card_height').value
+      });
+
+      return `${location.origin}/api/pin?${q.toString()}`;
+    }
+
+    function markdownText(url) {
+      return `![Repository Pin](${url})`;
+    }
+
+    function htmlText(url) {
+      const username = byId('username').value.trim();
+      const repo = byId('repo').value.trim();
+      return `<a href="https://github.com/${username}/${repo}">\n  <img src="${url}" alt="${repo} Repository Card" />\n</a>`;
+    }
+
+    function render() {
+      const url = endpointUrl();
+      byId('previewImg').src = url;
+      byId('markdownBox').value = markdownText(url);
+      byId('htmlBox').value = htmlText(url);
+    }
+
+    ['username','repo','theme','hide_border','border_radius','card_width','card_height']
+      .forEach((id) => byId(id).addEventListener('input', render));
+
+    byId('copyMdBtn').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(byId('markdownBox').value); } catch {}
+    });
+
+    byId('copyHtmlBtn').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(byId('htmlBox').value); } catch {}
+    });
+
+    byId('openPermalink').addEventListener('click', () => {
+      window.open(endpointUrl(), '_blank');
+    });
+
+    render();
+  </script>
+</body>
+</html>

@@ -22,7 +22,8 @@ router.get('/stats', async (req, res) => {
       renderErrorSvg(errors[0], {
         title: 'Invalid Request',
         theme: parsed.theme,
-        colors: parsed.colors
+        colors: parsed.colors,
+        card: parsed.card
       })
     );
   }
@@ -48,7 +49,8 @@ router.get('/stats', async (req, res) => {
         renderErrorSvg(`User "${parsed.username}" was not found on GitHub.`, {
           title: 'User Not Found',
           theme: parsed.theme,
-          colors: parsed.colors
+          colors: parsed.colors,
+          card: parsed.card
         })
       );
     }
@@ -57,7 +59,8 @@ router.get('/stats', async (req, res) => {
       renderErrorSvg('Unable to load data from GitHub API. Please try again shortly.', {
         title: 'GitHub Unavailable',
         theme: parsed.theme,
-        colors: parsed.colors
+        colors: parsed.colors,
+        card: parsed.card
       })
     );
   }

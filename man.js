@@ -13,6 +13,8 @@ const animalRoutes = require('./routes/animal');
 const vehicleRoutes = require('./routes/vehicle');
 const imgRoutes = require('./routes/img');
 const statsRoutes = require('./routes/stats');
+const pinRoutes = require('./routes/pin');
+const pinPanelRoutes = require('./routes/pin-panel');
 
 
 // Middleware
@@ -28,6 +30,8 @@ app.use('/api/vehicle', vehicleRoutes);
 app.use('/api/animal', animalRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api', statsRoutes);
+app.use('/api', pinRoutes);
+app.use('/', pinPanelRoutes);
 app.use('/img', imgRoutes);
 
 // Root route

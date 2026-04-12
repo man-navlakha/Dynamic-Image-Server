@@ -1,176 +1,355 @@
-
 # Dynamic Image Server
 
-Production-ready dynamic image APIs built with Express. This project now includes a custom GitHub stats card endpoint that returns animated SVG cards suitable for GitHub profile READMEs.
+Production-ready dynamic image APIs built with Express.  
+This project includes a fully custom GitHub Stats Card API that returns animated SVG cards for GitHub profile READMEs.
 
+![GitHub Stats](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
 
-![GitHub stats](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
+---
+
+## Overview
+
+Dynamic Image Server provides:
+
+- Dynamic GitHub stats cards as SVG
+- Animal image API with static and Pexels fallback
+- Vehicle image API with SVG fallback generation
+- Generic image resolver endpoint
+- Sample users API
+
+All APIs are designed for clean embedding, stable response behavior, and production deployment on Vercel.
+
+---
+
 ## Base URL
 
-Use your deployed host (example):
-
-```text
 https://img-server-theta.vercel.app
-```
+
+---
 
 ## Quick Start (Local)
 
-1. Install dependencies:
+### 1. Install dependencies
 
-```bash
-npm install
-```
+    npm install
 
-2. Configure environment variables in `.env`:
+### 2. Configure environment variables
 
-```env
-PORT=3000
-# Optional but strongly recommended for higher GitHub API limits
-GITHUB_TOKEN=ghp_xxx
-```
+Create a .env file in the project root:
 
-3. Run locally:
+    PORT=3000
+    GITHUB_TOKEN=ghp_xxx
 
-```bash
-node man.js
-```
+Notes:
 
-4. Run tests:
+- GITHUB_TOKEN is optional but strongly recommended for higher GitHub API rate limits.
+- PORT is optional in cloud deployment and mainly useful for local development.
 
-```bash
-npm test
-```
+### 3. Run the server
 
-## New Endpoint: GitHub Stats Card
+    node man.js
 
-- Method: `GET`
-- Path: `/api/stats`
-- Response content type: `image/svg+xml; charset=utf-8`
+### 4. Run tests
 
-### Required Query Params
+    npm test
 
-- `username` (required): GitHub login name.
+---
 
-### Optional Query Params
+## GitHub Stats Card API
 
-- `theme`: `dark` | `light` | `ocean` (default: `dark`)
-- `title_color`: hex color override (`#RRGGBB` or `RRGGBB`)
-- `text_color`: hex color override (`#RRGGBB` or `RRGGBB`)
-- `icon_color`: hex color override (`#RRGGBB` or `RRGGBB`)
-- `bg_color`: hex color override (`#RRGGBB` or `RRGGBB`)
-- `show_languages`: `true`/`false`, `1`/`0`, `yes`/`no`
+### Endpoint
 
-### API Examples
+- Method: GET
+- Path: /api/stats
+- Content-Type: image/svg+xml; charset=utf-8
+- Response format: SVG only (success and error responses)
 
-```text
-/api/stats?username=man-navlakha
-/api/stats?username=man-navlakha&theme=dark&title_color=blue
-/api/stats?username=man-navlakha&theme=ocean&title_color=00e5ff&text_color=e8f9ff&icon_color=40f3ff&bg_color=022135
-/api/stats?username=man-navlakha&show_languages=true
-```
+### Required Query Parameter
 
-Note: only valid hex overrides are applied. Non-hex values (such as `blue`) are safely ignored.
+- username: GitHub login name
 
-### Markdown Embed Examples
+### Optional Query Parameters
 
-```md
-![GitHub Stats](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
-![GitHub Stats - Dark](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=dark)
-![GitHub Stats - Custom](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean&show_languages=true&title_color=ecfeff&text_color=c9ecff&icon_color=3ddad7&bg_color=082f49)
-```
+- theme: dark, light, ocean
+- title_color: hex color override, example 00e5ff or #00e5ff
+- text_color: hex color override, example e8f9ff or #e8f9ff
+- icon_color: hex color override, example 40f3ff or #40f3ff
+- bg_color: hex color override, example 022135 or #022135
+- border_color: hex color override for card border
+- show_languages: true or false, also supports 1 or 0, yes or no
 
-## Theme Options
+Visibility toggles (default true unless noted):
+
+- show_avatar: show/hide profile avatar (default true)
+- show_followers: show/hide followers count (default true)
+- show_following: show/hide following count (default true)
+- show_repos: show/hide public repo count (default true)
+- show_title: show/hide "GitHub Stats" title (default true)
+- show_border: show/hide card border (default true)
+- show_languages: show/hide top languages block (default false)
+
+Layout controls:
+
+- border_radius: rounded card corner radius (0..40, default 22)
+- border_width: border width in px (0..6, default 1)
+- card_width: card width in px (320..800, default 430)
+- compact: compact density mode (default false)
+
+Important:
+
+- Only valid hex values are applied for color overrides.
+- Invalid color values are safely ignored.
+- If using # in URL query values, encode it as %23.
+
+---
+
+## API Usage Examples
+
+    /api/stats?username=man-navlakha
+    /api/stats?username=man-navlakha&theme=dark
+    /api/stats?username=man-navlakha&show_languages=true
+    /api/stats?username=man-navlakha&theme=ocean&title_color=00e5ff&text_color=e8f9ff&icon_color=40f3ff&bg_color=022135
+  /api/stats?username=man-navlakha&show_avatar=false&show_followers=false&show_following=true&show_repos=true
+  /api/stats?username=man-navlakha&border_radius=30&border_width=2&border_color=71f3c6&card_width=540
+  /api/stats?username=man-navlakha&compact=true&show_languages=true
+
+---
+
+## Clickable Demo Links
+
+- Basic Card  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha
+
+- Dark Theme  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=dark
+
+- Light Theme  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=light
+
+- Ocean Theme  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean
+
+- With Languages  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&show_languages=true
+
+- Fully Customized  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean&show_languages=true&title_color=ecfeff&text_color=c9ecff&icon_color=3ddad7&bg_color=082f49
+
+- No Avatar + Minimal Stats  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&show_avatar=false&show_followers=false&show_following=true&show_repos=true
+
+- Rounded Border + Wide Card  
+  https://img-server-theta.vercel.app/api/stats?username=man-navlakha&border_radius=30&border_width=2&border_color=71f3c6&card_width=540
+
+- Error Example (Invalid GitHub User)  
+  https://img-server-theta.vercel.app/api/stats?username=this-user-does-not-exist-xyz123
+
+---
+
+## Markdown Embed Examples
+
+    ![GitHub Stats](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
+    ![GitHub Stats Dark](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=dark)
+    ![GitHub Stats Light](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=light)
+    ![GitHub Stats Languages](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&show_languages=true)
+    ![GitHub Stats Custom](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean&show_languages=true&title_color=ecfeff&text_color=c9ecff&icon_color=3ddad7&bg_color=082f49)
+    ![GitHub Stats No Avatar](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&show_avatar=false)
+    ![GitHub Stats Wide Rounded](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&card_width=540&border_radius=30&border_width=2&border_color=71f3c6)
+
+---
+
+## Theme Defaults
 
 | Theme | title_color | text_color | icon_color | bg_color |
 |---|---|---|---|---|
-| dark | `#ffffff` | `#d5ddf0` | `#71f3c6` | `#0f172a` |
-| light | `#0f172a` | `#334155` | `#0ea5e9` | `#ecfeff` |
-| ocean | `#ecfeff` | `#b7e3f8` | `#3ddad7` | `#082f49` |
+| dark | #ffffff | #d5ddf0 | #71f3c6 | #0f172a |
+| light | #0f172a | #334155 | #0ea5e9 | #ecfeff |
+| ocean | #ecfeff | #b7e3f8 | #3ddad7 | #082f49 |
 
-Color override precedence:
+Color resolution order:
 
-1. Query override (`title_color`, etc.)
-2. Selected `theme`
-3. `dark` fallback
+1. Query parameter override
+2. Selected theme default
+3. dark theme fallback
+
+---
 
 ## Error Behavior
 
-Errors are always returned as SVG cards (never JSON), with appropriate HTTP status:
+The stats API always returns an SVG card, even when errors occur.
 
-- `400`: missing/invalid query params (`username` missing or malformed)
-- `404`: GitHub user not found
-- `502`: upstream GitHub API unavailable/rate-limited/network failure
+Status mapping:
 
-This keeps README embeds visually stable even on failures.
+- 400: missing or invalid query parameters
+- 404: GitHub user not found
+- 502: GitHub API unavailable, rate-limited, or upstream network issue
+
+This ensures GitHub README embeds remain visually stable.
+
+---
 
 ## Performance and Reliability
 
-The stats endpoint includes:
+Implemented protections:
 
-- In-memory cache with TTL (`10 minutes`) to reduce repeated GitHub calls.
+- In-memory cache with 10 minute TTL
 - HTTP cache headers:
-  - `max-age=300`
-  - `s-maxage=1800`
-  - `stale-while-revalidate=43200`
-- Strict query validation and sanitization.
-- Modular architecture for extensibility:
-  - `routes/stats.js`
-  - `lib/stats/githubClient.js`
-  - `lib/stats/query.js`
-  - `lib/stats/themeConfig.js`
-  - `lib/stats/svgRenderer.js`
-  - `lib/stats/cache.js`
+- max-age=300
+- s-maxage=1800
+- stale-while-revalidate=43200
+- Query validation and sanitization
+- Modular architecture for maintainability
+
+Stats module structure:
+
+- routes/stats.js
+- lib/stats/githubClient.js
+- lib/stats/query.js
+- lib/stats/themeConfig.js
+- lib/stats/svgRenderer.js
+- lib/stats/cache.js
+
+---
 
 ## Vercel Deployment Guide
 
-### 1) Import Project
+### 1. Import Project
 
-- Import this repository into Vercel.
-- Framework preset: `Other` / Node serverless.
+- Import repository into Vercel
+- Framework preset: Other or Node serverless
 
-### 2) Build Settings
+### 2. Build Settings
 
 - Build command: none required
 - Output directory: none required
-- Install command: `npm install`
-- Entrypoint already configured through `vercel.json` (`man.js`)
+- Install command: npm install
+- Entrypoint configured via vercel.json to man.js
 
-### 3) Environment Variables
+### 3. Environment Variables
 
-Set in Vercel project settings:
+Set in Vercel Project Settings:
 
-- `GITHUB_TOKEN` (recommended, keeps you away from low anonymous API limits)
-- `PORT` is optional for local usage only
+- GITHUB_TOKEN recommended
+- PORT optional for local workflows
 
-### 4) Deploy and Test
+### 4. Deploy and Test
 
-After deployment:
+Use:
 
-```text
-https://<your-project>.vercel.app/api/stats?username=man-navlakha
-```
+https://your-project.vercel.app/api/stats?username=man-navlakha
 
-### 5) Verify Headers
+### 5. Verify Response Headers
 
-Confirm response contains:
+Expected:
 
-- `content-type: image/svg+xml; charset=utf-8`
-- `cache-control: public, max-age=300, s-maxage=1800, stale-while-revalidate=43200`
+- content-type: image/svg+xml; charset=utf-8
+- cache-control: public, max-age=300, s-maxage=1800, stale-while-revalidate=43200
 
-## Scaling Suggestions
+---
 
-For higher traffic production usage:
+## Scaling Recommendations
 
-1. Replace in-memory cache with Redis/Upstash for shared cache across instances.
-2. Add ETag generation and conditional requests (`If-None-Match`) for bandwidth reduction.
-3. Add ISR-like regeneration policies at edge/CDN layer.
-4. Add explicit GitHub rate-limit backoff and circuit-breaker behavior.
-5. Put endpoint behind CDN with regional caching.
-6. Add observability: logs + metrics + alerting for upstream failures and latency.
+1. Move cache from memory to Redis or Upstash for multi-instance consistency.
+2. Add ETag and If-None-Match handling for lower bandwidth.
+3. Add edge caching and regional CDN strategy.
+4. Add GitHub rate-limit aware retry and backoff logic.
+5. Add observability with logs, metrics, and alerts.
+6. Add circuit-breaker fallback under upstream failures.
+
+---
 
 ## Existing Endpoints
 
-- `/img?text=...`: generic Wikimedia image resolver and redirect.
-- `/api/animal/:name`: returns configured animal image (or fetches from Pexels).
-- `/api/vehicle/:name`: returns configured vehicle image or generated SVG fallback.
-- `/api/users`: sample CRUD-like user endpoints.
+- /img?text=...  
+  Generic image resolver and redirect from Wikimedia Commons.
+
+- /api/pin?username=...&repo=...  
+  Custom GitHub repository pin card API (SVG), similar to GitHub Readme Stats pin cards.
+
+- /api/animal/:name  
+  Returns configured animal image or falls back to Pexels search.
+
+- /api/vehicle/:name  
+  Returns configured vehicle image or generated SVG label fallback.
+
+- /api/users  
+  Sample user endpoints for demonstration.
+
+---
+
+## Repository Pin Card API
+
+Endpoint:
+
+    /api/pin?username=man-navlakha&repo=blog_ms
+
+Supported query params:
+
+- username (required)
+- repo (required)
+- theme (optional): react, dark, light
+- title or name (optional): custom repository title text
+- owner_name (optional): custom owner label text
+- description (optional): custom description text
+- font_family (optional): custom font family string
+- icon_text (optional): custom icon symbol/emoji
+- image_url (optional): custom logo image URL (http/https)
+- show_image (optional boolean)
+- image_size (optional number, 22..72)
+- bg_color (optional hex)
+- bg_color2 (optional hex)
+- title_color (optional hex)
+- icon_color (optional hex)
+- text_color (optional hex)
+- border_color (optional hex)
+- card_width (optional number, 340..900)
+- card_height (optional number, 140..320)
+- border_radius (optional number, 8..40)
+- border_width (optional number, 0..6)
+- padding (optional number, 16..40)
+- title_size (optional number, 14..40)
+- desc_size (optional number, 11..24)
+- meta_size (optional number, 11..22)
+- hide_border (optional boolean)
+- show_icons (optional boolean)
+- show_owner (optional boolean)
+- show_description (optional boolean)
+- show_stats (optional boolean)
+- show_language (optional boolean)
+- show_repo_icon (optional boolean)
+- show_owner_icon (optional boolean)
+
+Example link:
+
+    https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms&theme=react&bg_color=20232a&title_color=61D9FA&icon_color=F8D866&hide_border=true&show_icons=true
+
+  Advanced customization example:
+
+    https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms&theme=react&title=blog_ms&owner_name=man-navlakha&description=Microservices%20based%20Blog%20Application%20with%20Spring%20Boot%20%26%20MySQL.&icon_text=%F0%9F%93%81&show_repo_icon=true&show_owner_icon=true&show_stats=true&show_language=true&card_width=780&card_height=280&title_size=44&desc_size=15&bg_color=20232a&bg_color2=0b1220&title_color=61D9FA&icon_color=F8D866&text_color=c9d1d9
+
+Markdown embed example:
+
+    <a href="https://github.com/man-navlakha/blog_ms">
+      <img width="278" src="https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms&theme=react&bg_color=20232a&title_color=61D9FA&icon_color=F8D866&hide_border=true&show_icons=true" alt="blog_ms Repository Card" />
+    </a>
+
+Pin builder panel (live HTML configurator):
+
+    https://img-server-theta.vercel.app/pin-panel
+
+---
+
+## Local Testing Notes
+
+Local test URL:
+
+http://localhost:3000/api/stats?username=man-navlakha
+
+PowerShell quick test:
+
+    curl.exe "http://localhost:3000/api/stats?username=man-navlakha&show_languages=true" -o stats.svg
+
+Important:
+
+- GitHub markdown cannot access localhost.
+- For GitHub profile README, always use public HTTPS URLs.

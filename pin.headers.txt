@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: image/svg+xml; charset=utf-8
+Cache-Control: public, max-age=300, s-maxage=1800, stale-while-revalidate=43200
+Content-Length: 1735
+ETag: W/"6c7-Xtuj/3XrRG8dx7h9cpn9BU+faQo"
+Date: Sun, 12 Apr 2026 13:11:36 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="780" height="260" viewBox="0 0 780 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Repository card for man-navlakha/blog_ms">
+  <defs>
+    <linearGradient id="pinBg-ivrbxf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#0a1630" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="pinGlow-ivrbxf" x="-20%" y="-20%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect x="6" y="6" rx="16" width="768" height="248" fill="url(#pinBg-ivrbxf)" stroke="#2f3b4a" stroke-width="1"/>
+  <g filter="url(#pinGlow-ivrbxf)" opacity="0.25">
+    <circle cx="72" cy="246" r="34" fill="#f8d866"/>
+  </g>
+
+  <text x="32" y="62" fill="#f8d866" font-size="32" font-family="Segoe UI, Arial, sans-serif">📁</text>
+  <text x="82" y="64" fill="#55b0ff" font-size="42" font-weight="700" font-family="Segoe UI, Arial, sans-serif">blog_ms</text>
+  <text x="32" y="98" fill="#d0d7e5" font-size="16" font-family="Segoe UI, Arial, sans-serif"><tspan fill="#f8d866">◔</tspan> man-navlakha</text>
+  <text x="32" y="132" fill="#d0d7e5" font-size="16" font-family="Segoe UI, Arial, sans-serif">No description provided.</text>
+
+  <line x1="32" y1="198" x2="748" y2="198" stroke="rgba(255,255,255,0.20)"/>
+  <text x="32" y="236" fill="#d0d7e5" font-size="14" font-family="Segoe UI, Arial, sans-serif"><tspan fill="#f8d866">♨</tspan> JavaScript</text>
+  <text x="598" y="236" text-anchor="start" fill="#d0d7e5" font-size="15" font-family="Segoe UI, Arial, sans-serif"><tspan fill="#f8d866">★</tspan> 1    <tspan fill="#f8d866">⑂</tspan> 0</text>
+</svg>
