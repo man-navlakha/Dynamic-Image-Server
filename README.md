@@ -263,6 +263,16 @@ Expected:
 - /img?text=...  
   Generic image resolver and redirect from Wikimedia Commons.
 
+- /icons?i=html,css,js  
+  Tech stack icon card generator that returns an SVG grid of branded tiles.
+
+  Supported labels come from the filenames inside `public/icons`.
+  Common aliases are supported too, for example `js` -> `javascript`, `next` -> `nextjs`, `node` -> `nodejs`, `tailwind` -> `tailwindcss`.
+
+  To get the full label list, open:
+
+    /api/icons
+
 - /api/pin?username=...&repo=...  
   Custom GitHub repository pin card API (SVG), similar to GitHub Readme Stats pin cards.
 
@@ -336,6 +346,14 @@ Markdown embed example:
 Pin builder panel (live HTML configurator):
 
     https://img-server-theta.vercel.app/pin-panel
+
+Tech stack icon example:
+
+  http://localhost:3000/icons?i=html,css,js
+
+Full label catalog:
+
+  http://localhost:3000/api/icons
 
 ---
 

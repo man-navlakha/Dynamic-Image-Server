@@ -12,6 +12,7 @@ const userRoutes = require('./routes/users');
 const animalRoutes = require('./routes/animal');
 const vehicleRoutes = require('./routes/vehicle');
 const imgRoutes = require('./routes/img');
+const iconRoutes = require('./routes/icons');
 const statsRoutes = require('./routes/stats');
 const pinRoutes = require('./routes/pin');
 const pinPanelRoutes = require('./routes/pin-panel');
@@ -31,6 +32,7 @@ app.use('/api/animal', animalRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api', statsRoutes);
 app.use('/api', pinRoutes);
+app.use('/', iconRoutes);
 app.use('/', pinPanelRoutes);
 app.use('/img', imgRoutes);
 
