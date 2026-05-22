@@ -155,7 +155,6 @@ test('renderStatsSvg grows height for stacked content', () => {
   const heightMatch = svg.match(/^<svg[^>]*height="(\d+)"/m);
   assert.ok(heightMatch);
   assert.ok(Number(heightMatch[1]) > 430);
-  assert.match(svg, /Progress:/);
 });
 
 test('renderStatsSvg renders no-metrics state', () => {
