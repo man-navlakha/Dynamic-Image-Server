@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>README Template Builder</title>
+  <link rel="stylesheet" href="/tamplates/assets/styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="panel">
+      <div class="toolbar">
+        <h1>README Builder</h1>
+        <div id="typeTabs" class="tabs" aria-label="Template type"></div>
+      </div>
+
+      <div class="template-picker">
+        <label for="templateSelect">Template</label>
+        <select id="templateSelect"></select>
+      </div>
+
+      <p id="templateDescription" class="description"></p>
+
+      <form id="templateForm" class="form-grid"></form>
+
+      <div class="button-row">
+        <button class="btn" type="submit" form="templateForm">Generate README</button>
+        <button class="btn secondary" id="clearBtn" type="button">Clear</button>
+      </div>
+
+      <p id="status" class="status" role="status"></p>
+    </section>
+
+    <section class="preview">
+      <div class="preview-head">
+        <h2>Generated Markdown</h2>
+        <div class="button-row compact">
+          <button class="btn secondary" id="copyBtn" type="button">Copy</button>
+          <button class="btn" id="downloadBtn" type="button">Download README.md</button>
+        </div>
+      </div>
+
+      <textarea id="output" class="code-box" spellcheck="false" placeholder="Your generated README will appear here."></textarea>
+    </section>
+  </main>
+
+  <script>
+    const typeOrder = ['profile', 'project', 'company'];
+    const typeLabels = { profile: 'Profile', project: 'Project', company: 'Company' };
+    const typeTabs = document.getElementById('typeTabs');
+    const templateSelect = document.getElementById('templateSelect');
+    const templateDescription = document.getElementById('templateDescription');
+    const form = document.getElementById('templateForm');
+    const output = document.getElementById('output');
+    const status = document.getElementById('status');
+    const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    let templates = [];
+    let selectedType = 'profile';
+    let selectedTemplate = null;
+    let questions = [];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function fieldMarkup(question) {
+      const required = question.required ? 'required' : '';
+      const placeholder = question.placeholder ? `placeholder="${escapeHtml(question.placeholder)}"` : '';
+      const inputType = ['url', 'email'].includes(question.type) ? question.type : 'text';
+
+      if (question.type === 'textarea') {
+        return `
+          <label class="${question.required ? 'req' : ''}" for="${question.key}">${escapeHtml(question.label)}</label>
+          <textarea id="${question.key}" name="${question.key}" ${required} ${placeholder}></textarea>
+        `;
+      }
+
+      return `
+        <label class="${question.required ? 'req' : ''}" for="${question.key}">${escapeHtml(question.label)}</label>
+        <input id="${question.key}" name="${question.key}" type="${inputType}" ${required} ${placeholder} />
+      `;
+    }
+
+    function collectAnswers() {
+      return questions.reduce((answers, question) => {
+        answers[question.key] = form.elements[question.key].value.trim();
+        return answers;
+      }, {});
+    }
+
+    function renderTypeTabs() {
+      const counts = templates.reduce((acc, template) => {
+        acc[template.type] = (acc[template.type] || 0) + 1;
+        return acc;
+      }, {});
+
+      typeTabs.innerHTML = typeOrder.map((type) => {
+        const count = counts[type] || 0;
+        const active = type === selectedType ? 'active' : '';
+        const disabled = count ? '' : 'disabled';
+        return `<button class="tab ${active}" type="button" data-type="${type}" ${disabled}>${typeLabels[type]} ${count}</button>`;
+      }).join('');
+    }
+
+    function renderTemplateOptions() {
+      const visible = templates.filter((template) => template.type === selectedType);
+
+      templateSelect.innerHTML = visible.map((template) => {
+        return `<option value="${template.endpoint}">${escapeHtml(template.name)} · ${escapeHtml(template.category)}</option>`;
+      }).join('');
+
+      selectedTemplate = visible[0] || null;
+      templateSelect.disabled = !selectedTemplate;
+    }
+
+    async function loadTemplate(endpoint) {
+      if (!endpoint) {
+        questions = [];
+        form.innerHTML = '';
+        templateDescription.textContent = 'No templates found for this type yet.';
+        return;
+      }
+
+      const response = await fetch(endpoint);
+      if (!response.ok) throw new Error('Unable to load template questions.');
+      selectedTemplate = await response.json();
+      questions = selectedTemplate.questions || [];
+      templateDescription.textContent = selectedTemplate.description || '';
+      form.innerHTML = questions.map(fieldMarkup).join('');
+      output.value = '';
+    }
+
+    async function loadTemplates() {
+      const response = await fetch('/api/tamplates');
+      if (!response.ok) throw new Error('Unable to load templates.');
+      const data = await response.json();
+      templates = data.templates || [];
+
+      if (!templates.some((template) => template.type === selectedType)) {
+        selectedType = templates[0]?.type || 'profile';
+      }
+
+      renderTypeTabs();
+      renderTemplateOptions();
+      await loadTemplate(selectedTemplate?.endpoint);
+    }
+
+    async function generateMarkdown() {
+      if (!selectedTemplate) return;
+
+      status.textContent = 'Generating...';
+      const response = await fetch(`${selectedTemplate.endpoint}/render`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(collectAnswers())
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to generate README.');
+      }
+
+      output.value = data.markdown;
+      status.textContent = 'README generated.';
+    }
+
+    function downloadMarkdown() {
+      const blob = new Blob([output.value], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'README.md';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    typeTabs.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-type]');
+      if (!button || button.disabled) return;
+      selectedType = button.dataset.type;
+      status.textContent = '';
+      output.value = '';
+      renderTypeTabs();
+      renderTemplateOptions();
+      await loadTemplate(selectedTemplate?.endpoint);
+    });
+
+    templateSelect.addEventListener('change', async () => {
+      status.textContent = '';
+      await loadTemplate(templateSelect.value);
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      try {
+        await generateMarkdown();
+      } catch (error) {
+        status.textContent = error.message;
+      }
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      if (!output.value) return;
+      await navigator.clipboard.writeText(output.value);
+      status.textContent = 'Copied to clipboard.';
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!output.value) return;
+      downloadMarkdown();
+      status.textContent = 'Downloaded README.md.';
+    });
+
+    clearBtn.addEventListener('click', () => {
+      form.reset();
+      output.value = '';
+      status.textContent = '';
+    });
+
+    loadTemplates().catch((error) => {
+      status.textContent = error.message;
+    });
+  </script>
+</body>
+</html>

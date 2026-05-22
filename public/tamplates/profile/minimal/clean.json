@@ -1,0 +1,25 @@
+{
+  "id": "clean",
+  "type": "profile",
+  "category": "minimal",
+  "name": "Clean Minimal",
+  "description": "A compact profile README using the stats card, tech icon grid, and two featured repository cards.",
+  "template": "clean.md",
+  "defaults": {
+    "base_url": "https://img-server-theta.vercel.app"
+  },
+  "fields": [
+    "full_name",
+    "headline",
+    "github_username",
+    "bio",
+    "currently_working_on",
+    "ask_me_about",
+    "portfolio_url",
+    "email",
+    "skills",
+    "repo_1",
+    "repo_2",
+    "linkedin_url"
+  ]
+}

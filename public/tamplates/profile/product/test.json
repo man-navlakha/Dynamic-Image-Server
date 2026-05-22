@@ -1,0 +1,35 @@
+{
+  "id": "test",
+  "type": "profile",
+  "category": "product",
+  "name": "Product Profile",
+  "description": "Full profile README with typing banner, stats, icon grid, pinned repos, contribution graph, and social links.",
+  "template": "test.md",
+  "defaults": {
+    "base_url": "https://img-server-theta.vercel.app"
+  },
+  "fields": [
+    "full_name",
+    "github_username",
+    "roles",
+    "currently_working_on",
+    "portfolio_url",
+    "ask_me_about",
+    "email",
+    "resume_url",
+    "skills",
+    "featured_image_url",
+    "repo_1",
+    "repo_2",
+    {
+      "key": "repo_3",
+      "required": true
+    },
+    {
+      "key": "repo_4",
+      "required": true
+    },
+    "linkedin_url",
+    "linkedin_label"
+  ]
+}

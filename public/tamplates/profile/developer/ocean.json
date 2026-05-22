@@ -1,0 +1,27 @@
+{
+  "id": "ocean",
+  "type": "profile",
+  "category": "developer",
+  "name": "Ocean Developer",
+  "description": "A developer-focused profile using the ocean stats theme, typing animation, dark icons, and two repository pins.",
+  "template": "ocean.md",
+  "defaults": {
+    "base_url": "https://img-server-theta.vercel.app"
+  },
+  "fields": [
+    "full_name",
+    "github_username",
+    "roles",
+    "bio",
+    "currently_working_on",
+    "portfolio_url",
+    "ask_me_about",
+    "email",
+    "resume_url",
+    "skills",
+    "repo_1",
+    "repo_2",
+    "linkedin_url",
+    "linkedin_label"
+  ]
+}

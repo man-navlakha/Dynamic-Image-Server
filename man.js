@@ -16,6 +16,7 @@ const iconRoutes = require('./routes/icons');
 const statsRoutes = require('./routes/stats');
 const pinRoutes = require('./routes/pin');
 const pinPanelRoutes = require('./routes/pin-panel');
+const tamplateRoutes = require('./routes/tamplates');
 
 
 // Middleware
@@ -34,6 +35,7 @@ app.use('/api', statsRoutes);
 app.use('/api', pinRoutes);
 app.use('/', iconRoutes);
 app.use('/', pinPanelRoutes);
+app.use('/', tamplateRoutes);
 app.use('/img', imgRoutes);
 
 // Root route
