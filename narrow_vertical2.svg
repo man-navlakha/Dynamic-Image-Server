@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="520" height="430" viewBox="0 0 520 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GitHub stats for man-navlakha">
+  <defs>
+    <linearGradient id="bg-wa6bb3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#2a3554" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="bar-wa6bb3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#71f3c6"/>
+      <stop offset="100%" stop-color="#8ad6f7"/>
+    </linearGradient>
+  </defs>
+
+  <style><![CDATA[
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Space+Grotesk:wght@300..700&display=swap');
+    svg { font-family: 'Montserrat', 'Poppins', sans-serif; }
+    .username { font-family: 'Space Grotesk', 'Montserrat', sans-serif; font-weight: 700; }
+    .numbers { font-family: 'Space Grotesk', 'Poppins', sans-serif; }
+  ]]></style>
+
+  <rect x="8" y="8" width="504" height="414" rx="22" fill="url(#bg-wa6bb3)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+  <text x="36" y="80" fill="#ffffff" font-size="25">GitHub Stats</text>
+  <text x="36" y="141" fill="#ffffff" font-size="48" class="username">man-navlakha</text>
+
+  <clipPath id="avatar-wa6bb3">
+    <circle cx="445.5" cy="82.5" r="38.5"/>
+  </clipPath>
+  <g clip-path="url(#avatar-wa6bb3)">
+    <image href="https://avatars.githubusercontent.com/u/170175748?v=4" x="407" y="44" width="77" height="77" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <circle cx="445.5" cy="82.5" r="38.5" stroke="#b9c8e6" stroke-width="4" opacity="0.9"/>
+
+  <line x1="36" y1="189" x2="484" y2="189" stroke="rgba(197,214,239,0.52)" stroke-width="2"/>
+
+  <g>
+<circle cx="44" cy="221" r="4" fill="#71f3c6" opacity="0.95"/>
+<rect x="36" y="230" width="11" height="8" rx="4" fill="#71f3c6" opacity="0.95"/>
+<text x="59" y="228" fill="#d5ddf0" font-size="20" font-weight="600">Followers: <tspan class="numbers" fill="#ffffff" font-size="21" font-weight="700">2</tspan></text>
+</g>
+<g>
+<circle cx="42" cy="259" r="3" fill="#71f3c6" opacity="0.95"/>
+<circle cx="52" cy="258" r="2" fill="#71f3c6" opacity="0.95"/>
+<rect x="36" y="268" width="8" height="7" rx="4" fill="#71f3c6" opacity="0.95"/>
+<rect x="46" y="268" width="10" height="7" rx="3" fill="#71f3c6" opacity="0.85"/>
+<text x="59" y="266" fill="#d5ddf0" font-size="20" font-weight="600">Following: <tspan class="numbers" fill="#ffffff" font-size="21" font-weight="700">6</tspan></text>
+</g>
+<g>
+<rect x="36" y="291" width="13" height="15" rx="3" fill="#71f3c6" opacity="0.95"/>
+<line x1="40" y1="296" x2="50" y2="296" stroke="#0f172a" stroke-width="2"/>
+<line x1="40" y1="300" x2="48" y2="300" stroke="#0f172a" stroke-width="2"/>
+<text x="59" y="304" fill="#d5ddf0" font-size="20" font-weight="600">Repos: <tspan class="numbers" fill="#ffffff" font-size="21" font-weight="700">47</tspan></text>
+</g>
+
+  <line x1="36" y1="325" x2="484" y2="325" stroke="rgba(197,214,239,0.42)" stroke-width="2"/>
+
+  <text x="36" y="353" fill="#ffffff" font-size="16">Repos: <tspan class="numbers" fill="#ffffff" font-weight="700">47</tspan></text>
+
+  <rect x="36" y="376" width="448" height="18" rx="9" fill="rgba(199,215,236,0.26)"/>
+  <rect x="36" y="376" width="211" height="18" rx="9" fill="url(#bar-wa6bb3)"/>
+</svg>

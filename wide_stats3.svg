@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="980" height="430" viewBox="0 0 980 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GitHub stats for man-navlakha">
+  <defs>
+    <linearGradient id="bg-msx4l9" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#2a3554" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="bar-msx4l9" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#71f3c6"/>
+      <stop offset="100%" stop-color="#8ad6f7"/>
+    </linearGradient>
+  </defs>
+
+    <style><![CDATA[
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@300..700&display=swap');
+        /* default: use Montserrat for general text, Space Grotesk for username, DM Mono for monospace where needed */
+        svg { font-family: 'Montserrat', 'Poppins', sans-serif; }
+        .username { font-family: 'Space Grotesk', 'Montserrat', sans-serif; font-weight:700; }
+        .label { font-family: 'Montserrat', 'Poppins', sans-serif; }
+        .mono { font-family: 'DM Mono', 'IBM Plex Mono', monospace; }
+        .numbers { font-family: 'Space Grotesk', 'Poppins', sans-serif; }
+    ]]></style>
+
+    <rect x="8" y="8" width="964" height="414" rx="22" fill="url(#bg-msx4l9)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+  <text x="49" y="110" fill="#ffffff" font-size="52" opacity="0">.</text>
+  <text x="49" y="110" fill="#ffffff" font-size="48" opacity="0">.</text>
+  <text x="49" y="110" fill="#ffffff" font-size="50" opacity="0">.</text>
+  <text x="49" y="110" fill="#ffffff" font-size="50" opacity="0">.</text>
+  <text x="49" y="110" fill="#ffffff" font-size="50" opacity="0">.</text>
+  <text x="49" y="110" fill="#ffffff" font-size="50" opacity="0">.</text>
+    <text x="49" y="110" fill="#ffffff" font-size="34">GitHub Stats</text>
+    <text x="49" y="193" fill="#ffffff" font-size="65" class="username">man-navlakha</text>
+
+  <clipPath id="avatar-msx4l9">
+    <circle cx="878.5" cy="112.5" r="52.5"/>
+  </clipPath>
+  <g clip-path="url(#avatar-msx4l9)">
+    <image href="https://avatars.githubusercontent.com/u/170175748?v=4" x="826" y="60" width="105" height="105" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <circle cx="878.5" cy="112.5" r="52.5" stroke="#b9c8e6" stroke-width="4" opacity="0.9"/>
+
+  <line x1="49" y1="258" x2="931" y2="258" stroke="rgba(197,214,239,0.52)" stroke-width="2"/>
+
+  <g>
+<circle cx="60" cy="305" r="6" fill="#71f3c6" opacity="0.95"/>
+        <rect x="49" y="316" width="16" height="11" rx="6" fill="#71f3c6" opacity="0.95"/>
+<text x="87" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="29" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="87" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="87" y="321" fill="#d5ddf0" font-size="31" font-weight="600">Followers: <tspan class="numbers" fill="#ffffff" font-size="34" font-weight="700">2</tspan></text>
+</g>
+<g>
+<circle cx="351" cy="305" r="4" fill="#71f3c6" opacity="0.95"/>
+        <circle cx="364" cy="303" r="3" fill="#71f3c6" opacity="0.95"/>
+        <rect x="343" y="316" width="11" height="10" rx="5" fill="#71f3c6" opacity="0.95"/>
+        <rect x="356" y="316" width="13" height="9" rx="4" fill="#71f3c6" opacity="0.85"/>
+<text x="381" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="29" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="381" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="381" y="321" fill="#d5ddf0" font-size="31" font-weight="600">Following: <tspan class="numbers" fill="#ffffff" font-size="34" font-weight="700">6</tspan></text>
+</g>
+<g>
+<rect x="637" y="296" width="18" height="20" rx="4" fill="#71f3c6" opacity="0.95"/>
+        <line x1="643" y1="303" x2="656" y2="303" stroke="#0f172a" stroke-width="2"/>
+        <line x1="643" y1="308" x2="654" y2="308" stroke="#0f172a" stroke-width="2"/>
+<text x="675" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="31" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="29" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="675" y="320" fill="#71f3c6" font-size="30" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="320" fill="#d5ddf0" font-size="27" opacity="0">.</text>
+<text x="675" y="321" fill="#d5ddf0" font-size="31" font-weight="600">Repos: <tspan class="numbers" fill="#ffffff" font-size="34" font-weight="700">47</tspan></text>
+</g>
+
+  <line x1="49" y1="352" x2="931" y2="352" stroke="rgba(197,214,239,0.42)" stroke-width="2"/>
+
+    <text x="49" y="403" fill="#71f3c6" font-size="30" opacity="0">.</text>
+    <text x="49" y="403" fill="#ffffff" font-size="47" opacity="0">.</text>
+    <text x="49" y="403" fill="#ffffff" font-size="46" opacity="0">.</text>
+        <text x="49" y="403" fill="#ffffff" font-size="20">Repos: <tspan class="numbers" fill="#ffffff" font-weight="700">47</tspan></text>
+
+  <rect x="49" y="423" width="882" height="18" rx="9" fill="rgba(199,215,236,0.26)"/>
+  <rect x="49" y="423" width="415" height="18" rx="9" fill="url(#bar-msx4l9)"/>
+</svg>

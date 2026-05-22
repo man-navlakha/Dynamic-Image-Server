@@ -1,7 +1,7 @@
 const express = require('express');
 const { getGitHubStats } = require('../lib/stats/githubClient');
 const { parseStatsQuery, validateParsedQuery } = require('../lib/stats/query');
-const { renderStatsSvg, renderErrorSvg } = require('../lib/stats/svgRenderer');
+const { renderStatsSvg, renderErrorSvg } = require('../lib/stats/svgRendererResponsive');
 const { statsCache, createCacheKey, DEFAULT_TTL_MS } = require('../lib/stats/cache');
 
 const router = express.Router();

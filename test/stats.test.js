@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const { parseStatsQuery, validateParsedQuery } = require('../lib/stats/query');
-const { renderStatsSvg, renderErrorSvg } = require('../lib/stats/svgRenderer');
+const { renderStatsSvg, renderErrorSvg } = require('../lib/stats/svgRendererResponsive');
 
 test('parseStatsQuery parses and normalizes inputs', () => {
   const parsed = parseStatsQuery({
