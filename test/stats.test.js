@@ -124,6 +124,40 @@ test('renderStatsSvg supports hiding avatar and selected metrics', () => {
   assert.match(svg, /rx="30"/);
 });
 
+test('renderStatsSvg grows height for stacked content', () => {
+  const svg = renderStatsSvg(
+    {
+      login: 'man-navlakha',
+      followers: 2,
+      following: 6,
+      publicRepos: 47,
+      avatarUrl: 'https://avatars.githubusercontent.com/u/1?v=4',
+      topLanguages: []
+    },
+    {
+      theme: 'dark',
+      colors: {},
+      card: { cardWidth: 520 },
+      vertical: true,
+      visibility: {
+        showAvatar: true,
+        showFollowers: true,
+        showFollowing: true,
+        showRepos: true,
+        showLanguages: false,
+        showTitle: true,
+        showBorder: true
+      },
+      showLanguages: false
+    }
+  );
+
+  const heightMatch = svg.match(/^<svg[^>]*height="(\d+)"/m);
+  assert.ok(heightMatch);
+  assert.ok(Number(heightMatch[1]) > 430);
+  assert.match(svg, /Progress:/);
+});
+
 test('renderStatsSvg renders no-metrics state', () => {
   const svg = renderStatsSvg(
     {
