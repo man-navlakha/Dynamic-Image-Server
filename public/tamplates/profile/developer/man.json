@@ -1,0 +1,69 @@
+{
+  "id": "man",
+  "type": "profile",
+  "category": "developer",
+  "name": "Man's Own MD",
+  "description": "Full profile README with typing banner, stats, icon grid, pinned repos, contribution graph, and social links.",
+  "template": "man.md",
+  "defaults": {
+    "base_url": "https://img-server-theta.vercel.app"
+  },
+  "fields": [
+    {
+      "key": "full_name",
+      "required": false
+    },
+    {
+      "key": "github_username",
+      "required": true
+    },
+    {
+      "key": "roles",
+      "required": true
+    },
+    {
+      "key": "bio",
+      "required": false
+    },
+    {
+      "key": "currently_working_on",
+      "required": false
+    },
+    {
+      "key": "portfolio_url",
+      "required": false
+    },
+    {
+      "key": "ask_me_about",
+      "required": false  
+    },
+    {
+      "key": "email",
+      "required": false
+    },
+    {
+      "key": "resume_url",
+      "required": false
+    },
+    {
+      "key": "skills",
+      "required": false
+    },
+    {
+      "key": "repo_1",
+      "required": false
+    },
+    {
+      "key": "repo_2",
+      "required": false
+    },
+    {
+      "key": "linkedin_url",
+      "required": false
+    },
+    {
+      "key": "linkedin_label",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "pxc",
+  "type": "project",
+  "category": "product",
+  "name": "Pixel Class Showcase",
+  "description": "A README template for showcasing a project with badges, features, tech stack, and author details.",
+  "template": "pxc.md",
+  "defaults": {
+    "base_url": "https://img-server-theta.vercel.app"
+  },
+  "fields": [
+    { "key": "logo_url", "required": true },
+    { "key": "product_name", "required": true },
+    { "key": "repo_owner", "required": true },
+    { "key": "repo_name", "required": true },
+    { "key": "short_bio", "required": false },
+    { "key": "demo_url", "required": true },
+    { "key": "report_bug_url", "required": false },
+    { "key": "request_feature_url", "required": false },
+    { "key": "faq_url", "required": false },
+    { "key": "ask_question_url", "required": false },
+    { "key": "donate_url", "required": false },
+    { "key": "long_description", "required": true },
+    { "key": "live_button_text", "required": false },
+    { "key": "live_button_url", "required": false },
+    { "key": "features", "required": true, "type": "list" },
+    { "key": "tech_stack", "required": true },
+    { "key": "prerequisites", "required": false, "type": "list" },
+    { "key": "clone_url", "required": true },
+    { "key": "project_dir", "required": true },
+    { "key": "install_command", "required": true },
+    { "key": "dev_command", "required": true },
+    { "key": "dev_url", "required": true },
+    { "key": "authors", "required": true, "type": "list" },
+    { "key": "feedback_email", "required": false },
+    { "key": "copyright_year", "required": true },
+    { "key": "copyright_name", "required": true },
+    { "key": "copyright_url", "required": false }
+  ]
+}
